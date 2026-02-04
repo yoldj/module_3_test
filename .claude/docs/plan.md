@@ -1,0 +1,189 @@
+# 방화벽 로그 모니터링 웹 어드민 개발 계획
+
+## 프로젝트 개요
+- **목적**: 방화벽 로그 실시간 모니터링 및 분석 웹 어드민 페이지
+- **기술 스택**: Next.js + Tailwind CSS + FastAPI + SQLite
+- **개발 기간**: 약 20시간 (20개 Feature)
+
+---
+
+## Phase 1: 프로젝트 초기화 및 환경 설정
+
+### Feature 1.1: 프로젝트 구조 및 환경 설정
+- [ ] Next.js 프론트엔드 프로젝트 초기화
+- [ ] Tailwind CSS 설정 및 기본 테마 구성
+- [ ] FastAPI 백엔드 프로젝트 초기화
+- [ ] 프로젝트 디렉토리 구조 생성
+- [ ] 개발 환경 설정 파일 작성 (.env, .gitignore 등)
+
+### Feature 1.2: 데이터베이스 초기 설정
+- [ ] SQLite 데이터베이스 연결 설정
+- [ ] SQLAlchemy/ORM 설정
+- [ ] 기본 데이터베이스 스키마 설계
+- [ ] 데이터베이스 마이그레이션 도구 설정
+
+---
+
+## Phase 2: 백엔드 기본 구조 개발
+
+### Feature 2.1: FastAPI 기본 구조 및 설정
+- [ ] FastAPI 애플리케이션 초기화
+- [ ] CORS 설정
+- [ ] 환경 변수 관리 (config 모듈)
+- [ ] 로깅 설정
+- [ ] API 문서 자동 생성 설정 (Swagger)
+
+### Feature 2.2: 데이터베이스 모델 설계
+- [ ] 방화벽 로그 모델 (FirewallLog)
+- [ ] 사용자 모델 (User)
+- [ ] 알림 설정 모델 (AlertSetting)
+- [ ] 시스템 설정 모델 (SystemSetting)
+- [ ] 모델 간 관계 설정
+
+### Feature 2.3: Pydantic 스키마 정의
+- [ ] 로그 관련 스키마 (LogCreate, LogRead, LogFilter)
+- [ ] 사용자 관련 스키마 (UserCreate, UserRead, UserLogin)
+- [ ] 알림 관련 스키마
+- [ ] 공통 응답 스키마 (SuccessResponse, ErrorResponse)
+
+---
+
+## Phase 3: 백엔드 API 개발
+
+### Feature 3.1: 로그 관리 API
+- [ ] GET /api/v1/logs - 로그 목록 조회 (페이징, 필터링)
+- [ ] GET /api/v1/logs/{id} - 로그 상세 조회
+- [ ] POST /api/v1/logs - 로그 생성 (테스트용)
+- [ ] DELETE /api/v1/logs/{id} - 로그 삭제
+- [ ] 로그 필터링 로직 구현
+
+### Feature 3.2: 로그 통계 및 분석 API
+- [ ] GET /api/v1/logs/stats - 로그 통계 조회
+- [ ] GET /api/v1/logs/stats/timeline - 시간대별 로그 분석
+- [ ] GET /api/v1/logs/stats/severity - 위험도별 통계
+- [ ] GET /api/v1/logs/stats/top-sources - 주요 출발지 IP 분석
+- [ ] GET /api/v1/logs/stats/top-destinations - 주요 목적지 IP 분석
+
+### Feature 3.3: 사용자 인증 및 관리 API
+- [ ] POST /api/v1/auth/login - 로그인
+- [ ] POST /api/v1/auth/logout - 로그아웃
+- [ ] GET /api/v1/users/me - 현재 사용자 정보
+- [ ] JWT 토큰 기반 인증 구현
+- [ ] 비밀번호 해싱 및 검증
+
+### Feature 3.4: 알림 설정 API
+- [ ] GET /api/v1/alerts - 알림 설정 목록 조회
+- [ ] POST /api/v1/alerts - 알림 설정 생성
+- [ ] PUT /api/v1/alerts/{id} - 알림 설정 수정
+- [ ] DELETE /api/v1/alerts/{id} - 알림 설정 삭제
+- [ ] 알림 조건 검증 로직
+
+---
+
+## Phase 4: 프론트엔드 기본 구조
+
+### Feature 4.1: Next.js 레이아웃 및 라우팅
+- [ ] App Router 기본 레이아웃 구성
+- [ ] 네비게이션 바 컴포넌트
+- [ ] 사이드바 컴포넌트
+- [ ] 페이지 라우팅 구조 설정
+- [ ] 로딩 및 에러 페이지
+
+### Feature 4.2: API 클라이언트 설정
+- [ ] Axios 또는 Fetch 기반 API 클라이언트 구현
+- [ ] API 엔드포인트 관리
+- [ ] 인터셉터 설정 (토큰 자동 추가)
+- [ ] 에러 핸들링 유틸리티
+- [ ] API 응답 타입 정의
+
+### Feature 4.3: 공통 UI 컴포넌트
+- [ ] Button 컴포넌트
+- [ ] Input 컴포넌트
+- [ ] Table 컴포넌트
+- [ ] Modal 컴포넌트
+- [ ] Alert/Toast 컴포넌트
+- [ ] Loading Spinner 컴포넌트
+
+---
+
+## Phase 5: 프론트엔드 주요 기능 개발
+
+### Feature 5.1: 로그인 페이지
+- [ ] 로그인 폼 UI
+- [ ] 로그인 API 연동
+- [ ] 토큰 저장 및 관리
+- [ ] 자동 로그인 (Remember Me)
+- [ ] 로그인 실패 처리
+
+### Feature 5.2: 대시보드 페이지
+- [ ] 대시보드 레이아웃 구성
+- [ ] 주요 통계 카드 (총 로그 수, 위험 로그 수 등)
+- [ ] 실시간 로그 미리보기
+- [ ] 위험도별 차트 (Chart.js 또는 Recharts)
+- [ ] 시간대별 로그 추세 차트
+
+### Feature 5.3: 로그 목록 페이지
+- [ ] 로그 테이블 UI (정렬, 페이징)
+- [ ] 로그 필터링 UI (날짜, 위험도, IP 등)
+- [ ] 로그 검색 기능
+- [ ] 로그 상세보기 모달
+- [ ] 로그 데이터 실시간 업데이트
+
+### Feature 5.4: 로그 상세 및 분석 페이지
+- [ ] 로그 상세 정보 표시
+- [ ] 관련 로그 표시
+- [ ] IP 정보 조회 (Geolocation)
+- [ ] 로그 타임라인 시각화
+- [ ] 로그 내보내기 기능 (CSV, JSON)
+
+### Feature 5.5: 통계 및 분석 페이지
+- [ ] 종합 통계 대시보드
+- [ ] 위험도별 분석 차트
+- [ ] 출발지/목적지 IP 분석
+- [ ] 시간대별 트래픽 분석
+- [ ] 커스텀 기간 선택 및 비교
+
+### Feature 5.6: 알림 설정 페이지
+- [ ] 알림 규칙 목록 표시
+- [ ] 알림 규칙 추가/수정 폼
+- [ ] 알림 조건 설정 UI (위험도, IP, 키워드 등)
+- [ ] 알림 활성화/비활성화 토글
+- [ ] 알림 테스트 기능
+
+### Feature 5.7: 사용자 설정 페이지
+- [ ] 사용자 프로필 표시
+- [ ] 비밀번호 변경 기능
+- [ ] 테마 설정 (다크 모드)
+- [ ] 알림 수신 설정
+- [ ] 시스템 설정 (자동 로그 삭제 주기 등)
+
+---
+
+## Phase 6: 고급 기능 및 최적화
+
+### Feature 6.1: 실시간 로그 모니터링
+- [ ] WebSocket 또는 Server-Sent Events 설정
+- [ ] 실시간 로그 수신 및 표시
+- [ ] 자동 스크롤 및 알림
+- [ ] 실시간 통계 업데이트
+
+### Feature 6.2: 로그 필터 및 검색 고도화
+- [ ] 고급 필터 UI (복합 조건)
+- [ ] 저장된 필터 기능
+- [ ] 전체 텍스트 검색
+- [ ] 정규식 검색 지원
+
+### Feature 6.3: 성능 최적화 및 테스트
+- [ ] 대용량 데이터 페이징 최적화
+- [ ] API 응답 캐싱
+- [ ] 프론트엔드 코드 스플리팅
+- [ ] 이미지 및 리소스 최적화
+- [ ] 기본 단위 테스트 작성
+
+---
+
+## 참고 사항
+- 각 Feature는 약 1시간 개발 시간을 목표로 함
+- Phase별로 순차적으로 진행하되, 필요시 병렬 개발 가능
+- 각 Feature 완료 후 간단한 테스트 수행
+- progress.md에서 실시간 진행 상황 업데이트
